@@ -2,12 +2,13 @@
   "name": "applications",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "watch": "nodemon server.js",
     "prepare": "husky install",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "lint": "eslint .  --ext .js"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
+    "eslint": "^8.33.0",
     "husky": "^8.0.3",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.3"
