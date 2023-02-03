@@ -1,32 +1,17 @@
-const express = require("express");
-const { ApolloServer } = require("apollo-server-express");
-const { loadFilesSync } = require("@graphql-tools/load-files");
-const { makeExecutableSchema } = require("@graphql-tools/schema");
-const path = require("path");
+require("dotenv").config();
+const app = require("./src/app");
+const { startApolloServer } = require("./src/services/apollo");
+const { connectToMongodb } = require("./src/services/mongodb");
 
-const typesArray = loadFilesSync(path.join(__dirname, "**/*.graphql"));
+const PORT = process.env.PORT;
 
-const resolversArray = loadFilesSync(path.join(__dirname, "**/*.resolvers.js"));
+async function startServer() {
+  await connectToMongodb();
+  await startApolloServer();
 
-const schema = makeExecutableSchema({
-  typeDefs: [typesArray],
-  resolvers: resolversArray,
-});
-
-const startApolloServer = async () => {
-  const app = express();
-
-  const server = new ApolloServer({
-    schema,
-  });
-
-  await server.start();
-
-  server.applyMiddleware({ app, path: "/data" });
-
-  app.listen(3000, () => {
+  app.listen(PORT, () => {
     console.log("Started graphql server..");
   });
-};
+}
 
-startApolloServer();
+startServer();
