@@ -22,6 +22,7 @@ async function startApolloServer() {
   await server.start();
 
   server.applyMiddleware({ app, path: "/data" });
+  return server;
 }
 
 module.exports = {
