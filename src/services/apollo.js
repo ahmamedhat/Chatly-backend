@@ -4,6 +4,8 @@ const { makeExecutableSchema } = require("@graphql-tools/schema");
 const path = require("path");
 const app = require("../app");
 
+let server;
+
 const typesArray = loadFilesSync(path.join(__dirname, "../../**/*.graphql"));
 const resolversArray = loadFilesSync(
   path.join(__dirname, "../../**/*.resolvers.js")
@@ -15,7 +17,7 @@ const schema = makeExecutableSchema({
 });
 
 async function startApolloServer() {
-  const server = new ApolloServer({
+  server = new ApolloServer({
     schema,
   });
 
@@ -25,6 +27,11 @@ async function startApolloServer() {
   return server;
 }
 
+async function stopApolloServer() {
+  server.stop();
+}
+
 module.exports = {
   startApolloServer,
+  stopApolloServer,
 };

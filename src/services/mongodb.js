@@ -22,7 +22,7 @@ mongo.once("open", function () {
 });
 
 async function closeMongodbConnection() {
-  await mongoose.disconnect();
+  await mongoose.connection.close();
 }
 
 module.exports = {

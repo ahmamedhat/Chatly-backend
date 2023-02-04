@@ -14,11 +14,12 @@ describe("Test Querying graphql apollo server", () => {
 
   afterAll(async () => {
     await closeMongodbConnection();
+    server.stop();
   });
 
   test("Should return all products with 200 success and with no errors", async () => {
     const response = await server.executeOperation({
-      query: "query getAllProducts {products { id }}",
+      query: "query getAllProducts {products { _id }}",
     });
     expect(response.errors).toBeUndefined();
     expect(response.data).toBeDefined();
