@@ -6,7 +6,7 @@ const { connectToMongodb } = require("./src/services/mongodb");
 const PORT = process.env.PORT;
 
 async function startServer() {
-  await connectToMongodb();
+  await connectToMongodb("Production");
   await startApolloServer();
 
   app.listen(PORT, () => {

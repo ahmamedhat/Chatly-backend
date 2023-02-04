@@ -3,12 +3,13 @@ const mongoose = require("mongoose");
 const mongodbURL = process.env.MONGODB_URL;
 const mongo = mongoose.connection;
 
-async function connectToMongodb() {
+async function connectToMongodb(dbName) {
   try {
     mongoose.set("strictQuery", false);
     mongoose.connect(mongodbURL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      dbName,
     });
   } catch (error) {
     console.log("Error connecting to mongodb", error);

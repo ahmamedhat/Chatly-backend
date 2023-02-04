@@ -17,37 +17,33 @@ describe("Test Querying graphql apollo server", () => {
     server.stop();
   });
 
-  test("Should return all products with 200 success and with no errors", async () => {
+  test("Should return all orders with 200 success and with no errors", async () => {
     const response = await server.executeOperation({
-      query: "query getAllProducts {products { _id }}",
+      query: "query getAllOrders {orders { _id }}",
     });
 
     expect(response.body.singleResult.errors).toBeUndefined();
     expect(response.body.singleResult.data).toBeDefined();
   });
 
-  test("Should create new product and return it in response body", async () => {
-    const query = `mutation AddNewProduct($name: String!, $price: Float!, $description: String!, $color: String!, $quantity: Int!, $salePrice: Float!) {
-      addNewProduct(name: $name, price: $price, description: $description, color: $color, quantity: $quantity, salePrice: $salePrice) {
+  test("Should create new order and return it in response body", async () => {
+    const query = `mutation MakeNewOrder($name: String!, $email: String!, $total: Float!) {
+      makeNewOrder(name: $name, email: $email, total: $total) {
         _id
       }
     }`;
 
     const variables = {
-      name: "Test product",
-      price: 39.99,
-      description: "Test description...",
-      color: "Black",
-      quantity: 5,
-      salePrice: 34.99,
+      name: "Test order",
+      email: "test@gmail.com",
+      total: 254.99,
     };
 
     const response = await server.executeOperation({
       query,
       variables,
     });
-
     expect(response.body.singleResult.errors).toBeUndefined();
-    expect(response.body.singleResult.data.addNewProduct._id).toBeDefined();
+    expect(response.body.singleResult.data.makeNewOrder._id).toBeDefined();
   });
 });
