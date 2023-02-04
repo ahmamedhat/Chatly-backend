@@ -1,15 +1,19 @@
-const orders = [
-  {
-    id: 3,
-    total: 759.0,
-    email: "Ahmed.medhat@gmail.com",
-  },
-];
+const Order = require("./orders.mongo");
 
-function getAllOrders() {
-  return orders;
+async function getAllOrders() {
+  return await Order.find({});
+}
+
+async function makeNewOrder(name, email, total) {
+  const newOrder = new Order({
+    name,
+    email,
+    total,
+  });
+  return await newOrder.save();
 }
 
 module.exports = {
   getAllOrders,
+  makeNewOrder,
 };

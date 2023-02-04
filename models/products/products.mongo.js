@@ -25,13 +25,8 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
-    createdAt: {
-      type: Date,
-      default: () => new Date().toISOString(),
-    },
   },
-  { versionKey: false },
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 );
 
 const productModel = model("Product", productSchema);

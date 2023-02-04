@@ -11,7 +11,7 @@ type Mutation {
     color: String!
     quantity: Int!
     salePrice: Float!
-  ): Product
+  ): Product!
 }
 
 type Product {
@@ -23,4 +23,5 @@ type Product {
   quantity: Int!
   salePrice: Float!
   createdAt: String!
+  updatedAt: String!
 }
