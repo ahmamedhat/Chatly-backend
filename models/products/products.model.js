@@ -1,41 +1,32 @@
-const products = [
-  {
-    id: 0,
-    name: "Running shoes",
-    price: 759.99,
-    description: "The best running sneakers you'll ever get!",
-    color: "White",
-    reviews: [],
-  },
-  {
-    id: 2,
-    name: "Phantom shoes",
-    price: 729.99,
-    description: "The best casual sneakers you'll ever get!",
-    color: "OffWhite",
-    reviews: [],
-  },
-];
+const Product = require("./products.mongo");
 
-function getAllProducts() {
-  return products;
+async function getAllProducts() {
+  return await Product.find().sort({ createdAt: -1 });
 }
 
-function getProductById(id) {
-  return products.find((product) => product.id === +id);
+async function getProductById(_id) {
+  return await Product.findById(_id);
 }
 
-function addNewProduct(id, name, price, description, color) {
-  const product = {
-    id,
+async function addNewProduct(
+  name,
+  price,
+  description,
+  color,
+  salePrice,
+  quantity
+) {
+  const newProduct = new Product({
     name,
-    price,
     description,
+    price,
     color,
-    reviews: [],
-  };
-  products.push(product);
-  return product;
+    salePrice,
+    quantity,
+  });
+
+  const response = await newProduct.save();
+  return response;
 }
 
 module.exports = {

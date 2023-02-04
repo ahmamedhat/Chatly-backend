@@ -6,21 +6,22 @@ const {
 
 module.exports = {
   Query: {
-    products: () => {
-      return getAllProducts();
+    products: async () => {
+      return await getAllProducts();
     },
-    product: (_, args) => {
-      return getProductById(args.id);
+    product: async (_, args) => {
+      return await getProductById(args._id);
     },
   },
   Mutation: {
-    addNewProduct: (_, args) => {
-      return addNewProduct(
-        args.id,
+    addNewProduct: async (_, args) => {
+      return await addNewProduct(
         args.name,
         args.price,
         args.description,
-        args.color
+        args.color,
+        args.salePrice,
+        args.quantity
       );
     },
   },
