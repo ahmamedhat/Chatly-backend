@@ -1,0 +1,29 @@
+type Query {
+  chats: [Chat]
+  chat(_id: ID!): Chat
+}
+
+input UserInput {
+  _id: ID!
+}
+
+input MessageInput {
+  _id: ID!
+}
+
+type Mutation {
+  addNewChat(
+    name: String!
+    users: [UserInput]!
+    messages: [MessageInput] = []
+  ): Chat!
+}
+
+type Chat {
+  _id: ID!
+  name: String!
+  users: [User]
+  messages: [Message]
+  createdAt: String!
+  updatedAt: String!
+}

@@ -1,0 +1,24 @@
+type Query {
+  messages: [Message]
+}
+
+input UserInput {
+  _id: ID!
+}
+
+input ChatInput {
+  _id: ID!
+}
+
+type Mutation {
+  addNewMessage(chat: ChatInput!, user: UserInput!, body: String!): Message!
+}
+
+type Message {
+  _id: ID!
+  chat: Chat!
+  user: User!
+  body: String!
+  createdAt: String!
+  updatedAt: String!
+}
