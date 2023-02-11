@@ -1,7 +1,7 @@
 const User = require("./users.mongo");
 
 async function getAllUsers() {
-  return await Order.find({});
+  return await User.find({});
 }
 
 async function createNewUser(name, email) {
