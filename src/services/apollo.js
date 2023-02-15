@@ -3,7 +3,7 @@ const { expressMiddleware } = require("@apollo/server/express4");
 const { loadFilesSync } = require("@graphql-tools/load-files");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 const path = require("path");
-const app = require("../app");
+const { app } = require("../app");
 
 const typesArray = loadFilesSync(path.join(__dirname, "../../**/*.graphql"));
 const resolversArray = loadFilesSync(
