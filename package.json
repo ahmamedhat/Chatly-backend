@@ -2,13 +2,13 @@
   "name": "applications",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "engines": {
     "node": ">=18.12.1"
   },
   "scripts": {
-    "start": "node server.js",
-    "watch": "nodemon server.js",
+    "start": "node index.js",
+    "watch": "nodemon index.js",
     "test": "jest --runInBand --detectOpenHandles --forceExit",
     "test-w": "jest --watch",
     "prepare": "husky install",
