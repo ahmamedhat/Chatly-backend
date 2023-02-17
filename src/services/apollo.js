@@ -11,7 +11,7 @@ const resolversArray = loadFilesSync(
 );
 
 const schema = makeExecutableSchema({
-  typeDefs: [typesArray],
+  typeDefs: typesArray,
   resolvers: resolversArray,
 });
 
