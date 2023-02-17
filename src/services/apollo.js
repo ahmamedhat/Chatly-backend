@@ -2,14 +2,14 @@ const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
 // const { loadFilesSync } = require("@graphql-tools/load-files");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
-const path = require("path");
+// const path = require("path");
 const { app } = require("../app");
-const { loadFilesSync } = require("@graphql-tools/load-files");
+// const { loadFilesSync } = require("@graphql-tools/load-files");
 
-const typesArray = loadFilesSync(path.join(__dirname, "../../**/*.graphql"));
-const resolversArray = loadFilesSync(
-  path.join(__dirname, "../../**/*.resolvers.js")
-);
+// const typesArray = loadFilesSync(path.join(__dirname, "../../**/*.graphql"));
+// const resolversArray = loadFilesSync(
+//   path.join(__dirname, "../../**/*.resolvers.js")
+// );
 
 const typeDefs = [
   /* GraphQL */ `
@@ -23,7 +23,7 @@ const typeDefs = [
   `,
 ];
 
-console.log("types are", typesArray[0].definitions);
+// console.log("types are", typesArray[0].definitions);
 
 const schema = makeExecutableSchema({
   // typeDefs: [typesArray],
