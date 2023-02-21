@@ -1,4 +1,3 @@
-const { instrument } = require("@socket.io/admin-ui");
 const { Server } = require("socket.io");
 const { httpServer } = require("../app");
 
@@ -18,11 +17,8 @@ function getActiveUsers(io) {
 async function connectSocketIo() {
   const io = new Server(httpServer, {
     cors: {
-      origin: [
-        "https://admin.socket.io",
-        "http://localhost:3000",
-        "https://chatlylive.vercel.app/",
-      ],
+      origin: ["https://chatlylive.vercel.app", "http://localhost:3000"],
+      methods: ["GET", "POST"],
     },
   });
 
@@ -63,9 +59,6 @@ async function connectSocketIo() {
       socket.broadcast.emit("users", users);
       console.log("user disconnected ", socket.username + socket.id);
     });
-  });
-  instrument(io, {
-    auth: false,
   });
 }
 
