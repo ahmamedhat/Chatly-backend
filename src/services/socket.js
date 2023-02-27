@@ -3,7 +3,7 @@ const { httpServer } = require("../app");
 
 function getActiveUsers(io) {
   const users = [];
-  for (let [socket] of io.of("/").sockets) {
+  for (let [_, socket] of io.of("/").sockets) {
     users.push({
       userID: socket.userID,
       username: socket.username,
@@ -11,8 +11,6 @@ function getActiveUsers(io) {
       image: socket.image,
     });
   }
-
-  // console.log("all users", users);
   return users;
 }
 
