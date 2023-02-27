@@ -5,6 +5,7 @@ const chatsTypeDef = gql`
     chats: [Chat]
     chat(_id: ID!): Chat
     users: [User]
+    user(email: String!): User
     messages: [Message]
   }
 
