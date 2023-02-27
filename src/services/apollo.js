@@ -26,6 +26,7 @@ async function startApolloServer() {
       "Access-Control-Allow-Origin",
       "https://chatlylive.vercel.app/"
     );
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     // Request methods you wish to allow
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE");
     // Request headers you wish to allow
