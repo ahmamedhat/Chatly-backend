@@ -1,6 +1,6 @@
 const { getAllChats, getChatById, addNewChat } = require("./chats.model");
 
-module.exports = {
+const chatsResolver = {
   Query: {
     chats: async () => {
       return await getAllChats();
@@ -15,3 +15,5 @@ module.exports = {
     },
   },
 };
+
+export default chatsResolver;

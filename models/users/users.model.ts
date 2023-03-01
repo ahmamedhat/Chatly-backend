@@ -1,4 +1,4 @@
-const User = require("./users.mongo");
+import User from "./users.mongo";
 
 async function getAllUsers() {
   return await User.find({});
@@ -16,8 +16,4 @@ async function createNewUser(name, email) {
   return await newUser.save();
 }
 
-module.exports = {
-  getAllUsers,
-  createNewUser,
-  getUser,
-};
+export default { getAllUsers, getUser, createNewUser };

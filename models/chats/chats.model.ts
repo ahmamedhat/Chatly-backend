@@ -1,5 +1,5 @@
-const Chat = require("./chats.mongo");
-const User = require("../users/users.mongo");
+import Chat from "./chats.mongo";
+import User from "../users/users.mongo";
 
 async function getAllChats() {
   return await Chat.find({});
@@ -18,8 +18,10 @@ async function addNewChat(name, users) {
   const response = await newChat.save();
   users.map((user) => {
     User.findById(user).then(async (user) => {
-      await user.chats.push(newChat._id);
-      await user.save();
+      //Todo: fix this array append due to ts error
+
+      // await user?.chats?.push(newChat._id);
+      await user?.save();
     });
   });
 

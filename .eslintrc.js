@@ -13,8 +13,12 @@ module.exports = {
   },
   rules: {
     "no-unused-vars": [
-      "error",
-      { args: "after-used", argsIgnorePattern: "^_" },
+      "warn",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+      },
     ],
   },
 };

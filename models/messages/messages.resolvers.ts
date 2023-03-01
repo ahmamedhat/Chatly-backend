@@ -1,6 +1,6 @@
 const { getAllMessages, addNewMessage } = require("./messages.model");
 
-module.exports = {
+const messagesResolvers = {
   Query: {
     messages: async () => {
       return await getAllMessages();
@@ -12,3 +12,5 @@ module.exports = {
     },
   },
 };
+
+export default messagesResolvers;

@@ -1,8 +1,15 @@
-const { Server } = require("socket.io");
-const { httpServer } = require("../app");
+import { Server, Socket } from "socket.io";
+import { httpServer } from "../app";
+
+interface SocketWithCreds extends Socket {
+  userID?: string;
+  username?: string;
+  email?: string;
+  image?: string;
+}
 
 function getActiveUsers(io) {
-  const users = [];
+  const users: any = [];
   for (let [_, socket] of io.of("/").sockets) {
     users.push({
       userID: socket.userID,
@@ -24,8 +31,8 @@ async function connectSocketIo() {
     transports: ["websocket", "polling"],
   });
 
-  io.use((socket, next) => {
-    const userID = socket.handshake.auth.userID;
+  io.use((socket: SocketWithCreds, next) => {
+    const userID = socket.handshake.auth.username;
     const username = socket.handshake.auth.username;
     const email = socket.handshake.auth.email;
     const image = socket.handshake.auth.image;
@@ -39,9 +46,9 @@ async function connectSocketIo() {
     next();
   });
 
-  io.on("connection", (socket) => {
+  io.on("connection", (socket: SocketWithCreds) => {
     console.log("a user connected", socket.username + " " + socket.userID);
-    socket.join(socket.userID);
+    socket.join(socket.userID!);
     const users = getActiveUsers(io);
     socket.broadcast.emit("users", users);
     socket.emit("users", users);

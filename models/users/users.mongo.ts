@@ -1,4 +1,4 @@
-const { model, Schema, default: mongoose } = require("mongoose");
+import { model, Schema, default as mongoose } from "mongoose";
 
 const userSchema = new Schema(
   {
@@ -9,6 +9,12 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: true,
+    },
+    image: {
+      type: String,
+    },
+    emailVerified: {
+      type: Boolean,
     },
     chats: {
       type: mongoose.Schema.Types.Array,
@@ -21,4 +27,4 @@ const userSchema = new Schema(
 
 const userModel = model("User", userSchema);
 
-module.exports = userModel;
+export default userModel;

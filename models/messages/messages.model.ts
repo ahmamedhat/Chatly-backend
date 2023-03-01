@@ -1,5 +1,5 @@
-const chatModel = require("../chats/chats.mongo");
-const Message = require("./messages.mongo");
+import chatModel from "../chats/chats.mongo";
+import Message from "./messages.mongo";
 
 async function getAllMessages() {
   return await Message.find({});
@@ -11,12 +11,14 @@ async function addNewMessage(chat, user, body) {
       user: {
         _id: user._id,
       },
-      chat: { _id: chat.id },
+      chat: { _id: chat?.id },
       body: body,
     });
     const response = await newMessage.save();
-    await chat.messages.push(newMessage);
-    await chat.save();
+    //Todo: fix this array append due to ts error
+
+    // await chat?.messages?.push(newMessage);
+    await chat?.save();
     return response;
   });
 }

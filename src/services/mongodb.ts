@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const mongodbURL = process.env.MONGODB_URL;
 const mongo = mongoose.connection;
@@ -6,10 +6,10 @@ const mongo = mongoose.connection;
 async function connectToMongodb(dbName) {
   try {
     mongoose.set("strictQuery", false);
-    mongoose.connect(mongodbURL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+    mongoose.connect(mongodbURL as string, {
       dbName,
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
     });
   } catch (error) {
     console.log("Error connecting to mongodb", error);

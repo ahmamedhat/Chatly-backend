@@ -58,4 +58,4 @@ const chatsTypeDef = gql`
   }
 `;
 
-module.exports = chatsTypeDef;
+export default chatsTypeDef;

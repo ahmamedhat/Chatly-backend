@@ -1,4 +1,4 @@
-const { model, Schema, default: mongoose } = require("mongoose");
+import { model, Schema, default as mongoose } from "mongoose";
 
 const chatSchema = new Schema(
   {
@@ -20,4 +20,4 @@ const chatSchema = new Schema(
 
 const chatModel = model("Chat", chatSchema);
 
-module.exports = chatModel;
+export default chatModel;
