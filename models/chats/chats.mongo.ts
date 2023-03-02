@@ -3,11 +3,11 @@ import { model, Schema, default as mongoose } from "mongoose";
 const chatSchema = new Schema(
   {
     users: {
-      type: mongoose.Schema.Types.Array,
+      type: [mongoose.Schema.Types.ObjectId],
       ref: "User",
     },
-    lastMessage: {
-      type: mongoose.Schema.Types.ObjectId,
+    messages: {
+      type: [mongoose.Schema.Types.ObjectId],
       ref: "Message",
     },
   },

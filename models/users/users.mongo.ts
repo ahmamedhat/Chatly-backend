@@ -17,7 +17,7 @@ const userSchema = new Schema(
       type: Boolean,
     },
     chats: {
-      type: mongoose.Schema.Types.Array,
+      type: [mongoose.Schema.Types.ObjectId],
       ref: "Chat",
       default: [],
     },

@@ -3,9 +3,9 @@ import { gql } from "apollo-server";
 const chatsTypeDef = gql`
   type Query {
     chats(userId: ID!): [Chat]!
+    chat(id: ID!): Chat!
     users: [User]
     user(email: String!): User
-    conversation(from: ID!, to: ID!): [Message!]!
   }
 
   type Mutation {
@@ -16,7 +16,7 @@ const chatsTypeDef = gql`
   type Chat {
     _id: ID!
     users: [User!]!
-    lastMessage: Message!
+    messages: [Message!]!
     createdAt: String!
     updatedAt: String!
   }

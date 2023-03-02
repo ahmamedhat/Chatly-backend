@@ -1,4 +1,4 @@
-import { QueryChatsArgs } from "../../src/generated/graphql";
+import { QueryChatsArgs, QueryChatArgs } from "../../src/generated/graphql";
 import chatsFunctions from "./chats.model";
 const mongoose = require("mongoose");
 
@@ -8,6 +8,9 @@ const chatsResolver = {
   Query: {
     chats: async (_, args: QueryChatsArgs) => {
       return await chatsFunctions.getAllChats(ObjectId(args.userId));
+    },
+    chat: async (_, args: QueryChatArgs) => {
+      return await chatsFunctions.getChat(ObjectId(args.id));
     },
   },
 };

@@ -8,8 +8,6 @@ async function connectToMongodb(dbName) {
     mongoose.set("strictQuery", false);
     mongoose.connect(mongodbURL as string, {
       dbName,
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
     });
   } catch (error) {
     console.log("Error connecting to mongodb", error);

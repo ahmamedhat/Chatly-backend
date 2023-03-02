@@ -19,13 +19,9 @@ export type Chat = {
   __typename?: 'Chat';
   _id: Scalars['ID'];
   createdAt: Scalars['String'];
-  lastMessage: Message;
+  messages: Array<Message>;
   updatedAt: Scalars['String'];
   users: Array<User>;
-};
-
-export type ChatInput = {
-  _id: Scalars['ID'];
 };
 
 export type Message = {
@@ -34,26 +30,15 @@ export type Message = {
   body: Scalars['String'];
   createdAt: Scalars['String'];
   from: User;
+  read: Scalars['Boolean'];
   to: User;
   updatedAt: Scalars['String'];
 };
 
-export type MessageInput = {
-  _id: Scalars['ID'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
-  addNewChat: Chat;
   addNewMessage: Message;
   createNewUser: User;
-};
-
-
-export type MutationAddNewChatArgs = {
-  messages?: InputMaybe<Array<InputMaybe<MessageInput>>>;
-  name: Scalars['String'];
-  users: Array<UserInput>;
 };
 
 
@@ -71,10 +56,16 @@ export type MutationCreateNewUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  chat: Chat;
   chats: Array<Maybe<Chat>>;
   conversation: Array<Message>;
   user?: Maybe<User>;
   users?: Maybe<Array<Maybe<User>>>;
+};
+
+
+export type QueryChatArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -101,10 +92,6 @@ export type User = {
   email: Scalars['String'];
   name: Scalars['String'];
   updatedAt: Scalars['String'];
-};
-
-export type UserInput = {
-  _id: Scalars['ID'];
 };
 
 export type AdditionalEntityFields = {
@@ -184,15 +171,12 @@ export type ResolversTypes = {
   Chat: ResolverTypeWrapper<Chat>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
-  ChatInput: ChatInput;
   Message: ResolverTypeWrapper<Message>;
-  MessageInput: MessageInput;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   User: ResolverTypeWrapper<User>;
-  UserInput: UserInput;
   AdditionalEntityFields: AdditionalEntityFields;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -200,15 +184,12 @@ export type ResolversParentTypes = {
   Chat: Chat;
   ID: Scalars['ID'];
   String: Scalars['String'];
-  ChatInput: ChatInput;
   Message: Message;
-  MessageInput: MessageInput;
+  Boolean: Scalars['Boolean'];
   Mutation: {};
   Query: {};
   User: User;
-  UserInput: UserInput;
   AdditionalEntityFields: AdditionalEntityFields;
-  Boolean: Scalars['Boolean'];
 };
 
 export type UnionDirectiveArgs = {
@@ -261,7 +242,7 @@ export type MapDirectiveResolver<Result, Parent, ContextType = any, Args = MapDi
 export type ChatResolvers<ContextType = any, ParentType extends ResolversParentTypes['Chat'] = ResolversParentTypes['Chat']> = {
   _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  lastMessage?: Resolver<ResolversTypes['Message'], ParentType, ContextType>;
+  messages?: Resolver<Array<ResolversTypes['Message']>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -272,18 +253,19 @@ export type MessageResolvers<ContextType = any, ParentType extends ResolversPare
   body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   from?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  read?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   to?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  addNewChat?: Resolver<ResolversTypes['Chat'], ParentType, ContextType, RequireFields<MutationAddNewChatArgs, 'messages' | 'name' | 'users'>>;
   addNewMessage?: Resolver<ResolversTypes['Message'], ParentType, ContextType, RequireFields<MutationAddNewMessageArgs, 'body' | 'from' | 'to'>>;
   createNewUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateNewUserArgs, 'email' | 'name'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  chat?: Resolver<ResolversTypes['Chat'], ParentType, ContextType, RequireFields<QueryChatArgs, 'id'>>;
   chats?: Resolver<Array<Maybe<ResolversTypes['Chat']>>, ParentType, ContextType, RequireFields<QueryChatsArgs, 'userId'>>;
   conversation?: Resolver<Array<ResolversTypes['Message']>, ParentType, ContextType, RequireFields<QueryConversationArgs, 'from' | 'to'>>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'email'>>;
