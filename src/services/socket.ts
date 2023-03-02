@@ -32,7 +32,7 @@ async function connectSocketIo() {
   });
 
   io.use((socket: SocketWithCreds, next) => {
-    const userID = socket.handshake.auth.username;
+    const userID = socket.handshake.auth.userID;
     const username = socket.handshake.auth.username;
     const email = socket.handshake.auth.email;
     const image = socket.handshake.auth.image;
