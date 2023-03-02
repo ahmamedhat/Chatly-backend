@@ -28,8 +28,9 @@ async function addNewChat(name, users) {
   return response;
 }
 
-module.exports = {
-  getAllChats,
-  getChatById,
-  addNewChat,
-};
+export default { getAllChats, getChatById, addNewChat };
+// module.exports = {
+//   getAllChats,
+//   getChatById,
+//   addNewChat,
+// };

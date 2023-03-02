@@ -4,11 +4,11 @@ async function getAllUsers() {
   return await User.find({});
 }
 
-async function getUser(email) {
+async function getUser(email: string) {
   return await User.findOne({ email });
 }
 
-async function createNewUser(name, email) {
+async function createNewUser(name: string, email: string) {
   const newUser = new User({
     name,
     email,

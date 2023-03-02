@@ -1,11 +1,12 @@
 import chatModel from "../chats/chats.mongo";
 import Message from "./messages.mongo";
+import { ChatInput, UserInput } from "../../src/generated/graphql";
 
 async function getAllMessages() {
   return await Message.find({});
 }
 
-async function addNewMessage(chat, user, body) {
+async function addNewMessage(chat: ChatInput, user: UserInput, body: string) {
   return chatModel.findById(chat._id).then(async (chat) => {
     const newMessage = new Message({
       user: {
@@ -23,7 +24,4 @@ async function addNewMessage(chat, user, body) {
   });
 }
 
-module.exports = {
-  getAllMessages,
-  addNewMessage,
-};
+export default { getAllMessages, addNewMessage };
