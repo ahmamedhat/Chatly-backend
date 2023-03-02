@@ -7,7 +7,7 @@
     "node": ">=18.12.1"
   },
   "scripts": {
-    "start": "node index.ts",
+    "start": "ts-node index.ts",
     "watch": "nodemon index.ts",
     "test": "jest --runInBand --detectOpenHandles --forceExit",
     "test-w": "jest --watch",

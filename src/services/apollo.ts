@@ -3,12 +3,12 @@ import { expressMiddleware } from "@apollo/server/express4";
 import app from "../app";
 import chatsTypeDef from "../../models/schema";
 import chatsResolver from "../../models/chats/chats.resolvers";
-import messagesResolver from "../../models/messages/messages.resolvers";
 import usersResolver from "../../models/users/users.resolvers";
+import messageResolver from "../../models/message/message.resolvers";
 
 const typeDefs = [chatsTypeDef];
 
-const resolvers = [chatsResolver, messagesResolver, usersResolver];
+const resolvers = [chatsResolver, messageResolver, usersResolver];
 
 async function startApolloServer() {
   const server = new ApolloServer({

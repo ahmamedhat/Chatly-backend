@@ -2,16 +2,12 @@ import { model, Schema, default as mongoose } from "mongoose";
 
 const chatSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
     users: {
       type: mongoose.Schema.Types.Array,
       ref: "User",
     },
-    messages: {
-      type: mongoose.Schema.Types.Array,
+    lastMessage: {
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Message",
     },
   },

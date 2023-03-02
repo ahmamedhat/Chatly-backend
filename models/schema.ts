@@ -1,40 +1,22 @@
-const { gql } = require("apollo-server");
+import { gql } from "apollo-server";
 
 const chatsTypeDef = gql`
   type Query {
-    chats: [Chat]
-    chat(_id: ID!): Chat
+    chats(userId: ID!): [Chat]!
     users: [User]
     user(email: String!): User
-    messages: [Message]
+    conversation(from: ID!, to: ID!): [Message!]!
   }
 
   type Mutation {
-    addNewChat(
-      name: String!
-      users: [UserInput]!
-      messages: [MessageInput] = []
-    ): Chat!
     createNewUser(name: String!, email: String!): User!
-    addNewMessage(chat: ChatInput!, user: UserInput!, body: String!): Message!
-  }
-
-  input UserInput {
-    _id: ID!
-  }
-
-  input MessageInput {
-    _id: ID!
-  }
-  input ChatInput {
-    _id: ID!
+    addNewMessage(from: ID!, to: ID!, body: String!): Message!
   }
 
   type Chat {
     _id: ID!
-    name: String!
-    users: [User]
-    messages: [Message]
+    users: [User!]!
+    lastMessage: Message!
     createdAt: String!
     updatedAt: String!
   }
@@ -50,9 +32,10 @@ const chatsTypeDef = gql`
 
   type Message {
     _id: ID!
-    chat: Chat!
-    user: User!
+    from: User!
+    to: User!
     body: String!
+    read: Boolean!
     createdAt: String!
     updatedAt: String!
   }
