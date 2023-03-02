@@ -1,5 +1,4 @@
 import {
-  Chat,
   MutationAddNewChatArgs,
   QueryChatArgs,
 } from "../../src/generated/graphql";
