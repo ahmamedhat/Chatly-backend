@@ -47,6 +47,7 @@ export type Mutation = {
   __typename?: "Mutation";
   addNewMessage: Message;
   createNewUser: User;
+  markAsRead?: Maybe<Message>;
 };
 
 export type MutationAddNewMessageArgs = {
@@ -58,6 +59,10 @@ export type MutationAddNewMessageArgs = {
 export type MutationCreateNewUserArgs = {
   email: Scalars["String"];
   name: Scalars["String"];
+};
+
+export type MutationMarkAsReadArgs = {
+  id: Scalars["ID"];
 };
 
 export type Query = {
@@ -358,6 +363,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationCreateNewUserArgs, "email" | "name">
+  >;
+  markAsRead?: Resolver<
+    Maybe<ResolversTypes["Message"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationMarkAsReadArgs, "id">
   >;
 };
 

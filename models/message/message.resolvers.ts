@@ -1,4 +1,7 @@
-import { MutationAddNewMessageArgs } from "../../src/generated/graphql";
+import {
+  MutationAddNewMessageArgs,
+  MutationMarkAsReadArgs,
+} from "../../src/generated/graphql";
 import messageFunctions from "./message.model";
 const mongoose = require("mongoose");
 
@@ -12,6 +15,9 @@ const messageResolvers = {
         ObjectId(args.to),
         args.body
       );
+    },
+    markAsRead: async (_, args: MutationMarkAsReadArgs) => {
+      return await messageFunctions.markAsRead(ObjectId(args.id));
     },
   },
 };

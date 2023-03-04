@@ -61,14 +61,24 @@ async function connectSocketIo() {
       console.log(message);
       console.log("room", room);
       if (!room) {
-        socket.broadcast.emit("receive_message", message);
+        socket.broadcast.emit("receive_message", message, socket.userID);
       } else {
-        socket.to(room).emit("receive_message", message);
+        socket.to(room).emit("receive_message", message, socket.userID);
       }
       console.log("user: ", socket.username);
       console.log("id: ", socket.userID);
-      console.log("saying: ", message.message);
+      console.log("saying: ", message.body);
     });
+
+    socket.on("send_typing", (room) => {
+      console.log("room", room);
+      if (!room) {
+        socket.broadcast.emit("receive_typing", socket.userID);
+      } else {
+        socket.to(room).emit("receive_typing", socket.userID);
+      }
+    });
+
     socket.on("disconnect", () => {
       const users = getActiveUsers(io);
       socket.broadcast.emit("users", users);

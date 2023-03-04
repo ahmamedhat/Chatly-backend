@@ -11,6 +11,7 @@ const chatsTypeDef = gql`
   type Mutation {
     createNewUser(name: String!, email: String!): User!
     addNewMessage(from: ID!, to: ID!, body: String!): Message!
+    markAsRead(id: ID!): Message
   }
 
   type Chat {

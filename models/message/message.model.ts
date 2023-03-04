@@ -26,4 +26,8 @@ async function addNewMessage(from: ObjectId, to: ObjectId, body: string) {
   return (await newMessage.populate("to")).populate("from");
 }
 
-export default { addNewMessage };
+async function markAsRead(id: ObjectId) {
+  return await Message.findByIdAndUpdate(id, { read: true });
+}
+
+export default { addNewMessage, markAsRead };

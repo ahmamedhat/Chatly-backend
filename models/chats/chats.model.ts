@@ -11,9 +11,24 @@ async function getChat(_id: ObjectId) {
 }
 
 async function getAllChats(userId: ObjectId) {
-  return await Chat.find({
-    users: userId,
-  });
+  return await Chat.find(
+    {
+      users: userId,
+    },
+    { messages: { $slice: -1 } }
+  )
+    .populate({ path: "users", model: User })
+    .populate({
+      path: "messages",
+      populate: [
+        {
+          path: "to",
+        },
+        {
+          path: "from",
+        },
+      ],
+    });
 }
 
 export default { getAllChats, getChat };
