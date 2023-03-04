@@ -71,7 +71,6 @@ async function connectSocketIo() {
     });
 
     socket.on("send_typing", (room) => {
-      console.log("room", room);
       if (!room) {
         socket.broadcast.emit("receive_typing", socket.userID);
       } else {

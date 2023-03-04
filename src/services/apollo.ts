@@ -1,10 +1,12 @@
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
-import app from "../app";
+import app, { httpServer } from "../app";
 import chatsTypeDef from "../../models/schema";
 import chatsResolver from "../../models/chats/chats.resolvers";
 import usersResolver from "../../models/users/users.resolvers";
 import messageResolver from "../../models/message/message.resolvers";
+import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
+import cors from "cors";
 
 const typeDefs = [chatsTypeDef];
 
@@ -14,6 +16,7 @@ async function startApolloServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
 
   await server.start();
@@ -36,7 +39,13 @@ async function startApolloServer() {
     next();
   });
 
-  app.use("/graphql", expressMiddleware(server));
+  app.use(
+    "/graphql",
+    cors({
+      origin: ["https://chatlylive.vercel.app"],
+    }),
+    expressMiddleware(server)
+  );
 
   return server;
 }
