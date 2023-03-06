@@ -5,7 +5,7 @@ const chatsTypeDef = gql`
     chats(userId: ID!): [Chat]!
     chat(id: ID!): Chat!
     users: [User]
-    user(email: String!): User
+    user(id: ID!): User
   }
 
   type Mutation {
@@ -26,6 +26,7 @@ const chatsTypeDef = gql`
     _id: ID!
     email: String!
     name: String!
+    image: String!
     chats: [Chat]
     createdAt: String!
     updatedAt: String!

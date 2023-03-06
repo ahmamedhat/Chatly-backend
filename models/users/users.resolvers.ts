@@ -4,13 +4,17 @@ import {
 } from "../../src/generated/graphql";
 import userFunctions from "../users/users.model";
 
+const mongoose = require("mongoose");
+
+const ObjectId = mongoose.Types.ObjectId;
+
 const usersResolvers = {
   Query: {
     users: async () => {
       return await userFunctions.getAllUsers();
     },
     user: async (_, args: QueryUserArgs) => {
-      return await userFunctions.getUser(args.email);
+      return await userFunctions.getUser(ObjectId(args.id));
     },
   },
   Mutation: {

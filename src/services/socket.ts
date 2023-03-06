@@ -9,15 +9,20 @@ interface SocketWithCreds extends Socket {
 }
 
 function getActiveUsers(io) {
-  const users: any = [];
-  for (let [_, socket] of io.of("/").sockets) {
-    users.push({
+  let users: any = [];
+  io.of("/").sockets.forEach((socket, key) => {
+    if (users.findIndex((user) => user.userID === socket.userID) !== -1) {
+      return;
+    }
+    const user = {
       userID: socket.userID,
       username: socket.username,
       email: socket.email,
       image: socket.image,
-    });
-  }
+    };
+
+    users.push(user);
+  });
   return users;
 }
 
