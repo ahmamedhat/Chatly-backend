@@ -17,6 +17,7 @@ async function getAllChats(userId: ObjectId) {
     },
     { messages: { $slice: -1 } }
   )
+    .sort({ updatedAt: -1 })
     .populate({ path: "users", model: User })
     .populate({
       path: "messages",
