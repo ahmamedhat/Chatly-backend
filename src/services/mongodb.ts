@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const mongodbURL = process.env.MONGODB_URL;
 const mongo = mongoose.connection;
 
-async function connectToMongodb(dbName) {
+async function connectToMongodb(dbName: string) {
   try {
     mongoose.set("strictQuery", false);
     mongoose.connect(mongodbURL as string, {
